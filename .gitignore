@@ -13,3 +13,4 @@ cache*
 # ignores any file or directory that ends in "data", such as project_data/, big_file_of_data
 *data
 *.pyc 
+db.sqlite3
