@@ -24,7 +24,7 @@ def register(request):
     new_user=User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = pw_hash, birthday = request.POST['birthday'])
     request.session['user_id'] = new_user.id
     request.session['user_name'] = new_user.first_name
-    return redirect('/books')
+    return redirect('/')
 
 def login(request):
     errors = User.objects.basic_validator_login(request.POST)
@@ -37,7 +37,7 @@ def login(request):
         if bcrypt.checkpw(request.POST['password'].encode(), user[0].password.encode()):
             request.session['user_id'] = user[0].id
             request.session['user_name'] = user[0].first_name
-            return redirect('/books')
+            return redirect('/')
     return redirect('/')
 
 def success(request):
