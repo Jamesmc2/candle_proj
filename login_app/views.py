@@ -11,7 +11,7 @@ def index(request):
     context = {
         'accounts' : User.objects.all(),
         }
-    return render(request,'login_register.html',context)
+    return render(request,'user_page.html',context)
 
 def register(request):
     errors = User.objects.basic_validator_reg(request.POST)
@@ -55,4 +55,12 @@ def delete(request):
     User.objects.get(id=request.session['user_id']).delete()
     del request.session['user_id']
     del request.session['user_name']
+    return redirect('/')
+
+def edit_account(reqeust):
+    current_user = User.objects.get(id=reqeust.session['user_id'])
+    current_user.first_name = reqeust.POST['first_name']
+    current_user.last_name = reqeust.POST['last_name']
+    current_user.email = reqeust.POST['email']
+    current_user.save()
     return redirect('/')
