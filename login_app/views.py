@@ -38,7 +38,7 @@ def login(request):
             request.session['user_id'] = user[0].id
             request.session['user_name'] = user[0].first_name
             return redirect('login/')
-    return redirect('login/')
+    return redirect('/login')
 
 def success(request):
     if not 'user_id' in request.session:
