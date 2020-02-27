@@ -18,27 +18,27 @@ def register(request):
     if len(errors)>0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect('/')
+        return redirect('login/')
     password = request.POST['password']
     pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
     new_user=User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = pw_hash, birthday = request.POST['birthday'])
     request.session['user_id'] = new_user.id
     request.session['user_name'] = new_user.first_name
-    return redirect('/')
+    return redirect('login/')
 
 def login(request):
     errors = User.objects.basic_validator_login(request.POST)
     if len(errors)>0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect('/')
+        return redirect('login/')
     user = User.objects.filter(email = request.POST['email'])
     if user:
         if bcrypt.checkpw(request.POST['password'].encode(), user[0].password.encode()):
             request.session['user_id'] = user[0].id
             request.session['user_name'] = user[0].first_name
-            return redirect('/')
-    return redirect('/')
+            return redirect('login/')
+    return redirect('login/')
 
 def success(request):
     if not 'user_id' in request.session:
@@ -48,7 +48,6 @@ def success(request):
 def logout(request):
     del request.session['user_id']
     del request.session['user_name']
-
     return redirect('/')
 
 def delete(request):
@@ -64,3 +63,6 @@ def edit_account(reqeust):
     current_user.email = reqeust.POST['email']
     current_user.save()
     return redirect('/')
+
+
+    

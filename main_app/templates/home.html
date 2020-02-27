@@ -9,53 +9,12 @@
     <title>A Wick & A Nod</title>
     {% load static %}
     <link rel='stylesheet' type='text/css' href='{% static "css/styles_home.css" %}'>
+    <link rel='stylesheet' type='text/css' href='{% static "css/main.css" %}'>
 </head>
 
 <body>
     <div id='wrapper'>
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg">
-                <img id='logo' src="{% static 'img/IMG_2839.png' %}" alt="my image">
-                <a class="navbar-brand text-white" href="/">Home</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link text-white" href="/about">About <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Candles
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/shop">Speakeasy Sips</a>
-                                <a class="dropdown-item" href="#">Holiday Line</a>
-                            </div>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link text-white" href="/social">Social</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#" aria-disabled="true"></a>
-                        </li>
-                    </ul>
-                    {% if request.session.user_id %}
-                    <a href="#" class="text-white">Cart |</a>
-                    {% endif %}
-                    {% if not request.session.user_id %}
-                    <a class="btn btn-light" href="login/" role="button">Login</a>
-                    {% else %}
-                    <span class='text-white'> Welcome, </span> <a href="/logout" class="text-white">
-                        {{request.session.user_name}}!</a>
-                    {% endif %}
-                </div>
-            </nav>
-        </header>
+        {% include 'header.html' %}
         <div id="carouselExampleControls" class="carousel slide img_car container-fluid" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -107,16 +66,8 @@
                 </div>
             </div>
         </div>
-        <footer>
-            <div class='foot_center'>
-                <img class='icon' src="{% static 'img/fbicon.png' %}" alt="FB logo">
-                <a class="text-decoration-none" href="https://facebook.com/awickandanodcandleco">awickandanodcandleco</a> |
-                <img class="icon" src="{% static 'img/instaicon.png' %}" alt="Insta logo">
-                <a class="text-decoration-none" href="https://instagram.com/awickandanodcandleco">awickandanodcandleco</a> |
-                <img class="icon" src="{% static 'img/etsyicon.png' %}" alt="Etsy logo">
-                <a class="text-decoration-none" href="https://etsy.com/shop/AWickAndANodCandleCo">AWickAndANodCandleCo</a>
-            </div>
-        </footer>
+        
+        {% include 'footer.html' %}
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"></script>
