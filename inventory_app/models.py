@@ -2,7 +2,7 @@ from django.db import models
 from login_app.models import User
 
 class Scent(models.Model):
-    BEES = "bees_knees.jpg"
+    BEES = "bees_knees_small.jpg"
     FRENCH = "french75.jpg"
     SOUTH = "south_side_fizz.jpg"
     TONIC = "tonic_and_gin.jpg"
@@ -32,7 +32,7 @@ class Candle(models.Model):
         ("Melt", "Melt")
     ]
 
-    BEES = "bees_knees.jpg"
+    BEES = "bees_knees_small.jpg"
     FRENCH = "french75.jpg"
     SOUTH = "south_side_fizz.jpg"
     TONIC = "tonic_and_gin.jpg"
