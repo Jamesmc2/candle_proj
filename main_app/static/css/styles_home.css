@@ -42,16 +42,3 @@ header {
     
     
 }
-footer {
-    background-color: black;
-    display: flex;
-    padding: 20px;
-    color: white;
-}
-.foot_center{
-    margin-left: 300px;
-}
-.icon {
-    height: auto;
-    width: 30px;
-}

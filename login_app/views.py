@@ -40,6 +40,7 @@ def login(request):
             return redirect('login/')
     return redirect('/')
 
+
 def success(request):
     if not 'user_id' in request.session:
         return redirect('/')
