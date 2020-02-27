@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,35 +44,85 @@
             Welcome, <a href="/logout"> {{request.session.user_name}}!</a>
             {% endif %}
         </div>
-    </nav>
+    </nav> -->
 
-    <div class="container">
-        {% for candle in candles %}
-        <div class="media mb-5 border border-primary">
-            {% load static %}
-            <img src="{% static 'img/' %}{{candle.image}}" class="mr-3" alt="{{candle.name}}">
-            <div class="media-body">
-                <h5 class="mt-0">{{candle.name}}</h5>
-                <p>{{candle.desc}}</p>
-                <p>${{candle.price}}</p>
-                <form class="form-inline">
-                    <label class="my-1 mr-2" for="quantity">Quantity</label>
-                    <select class="custom-select mr-sm-2" id="quantity">
-                        <option selected>Choose...</option>
-                        <option value = "1">1</option>
-                        <option value = "2">2</option>
-                        <option value = "3">3</option>
-                        <option value = "4">4</option>
-                        <option value = "5">5</option>
-                    </select>
-                </form>
+    {% include "header.html" %}
+
+    <div class="container-fluid" style="background-color: #747474;">
+        {% for scent in scents %}
+        <div class="row">
+            <div class="col"></div>
+            <div class="media mb-5 border border-dark col-6" style="background-color: white;">
+                {% load static %}
+                <img src="{% static 'img/' %}{{scent.image}}" class="mr-3" alt="{{candle.name}}">
+                <div class="media-body">
+                    <h5 class="mt-2">{{scent.name}}</h5>
+                    <p>{{scent.desc}}</p>
+                    {% for candle in scent.candles.all %}
+                    <form action = "/shop/cart" method="POST" class="form-inline mb-2">
+                        {%csrf_token %}
+                        <label class="my-1 mr-2" for="quantity">{{candle.style}}: ${{candle.price}}</label>
+                        <select class="custom-select mr-sm-2" id="quantity" name="quantity">
+                            <option selected value="1">1</option>
+                            <option value = "2">2</option>
+                            <option value = "3">3</option>
+                            <option value = "4">4</option>
+                            <option value = "5">5</option>
+                        </select>
+                        <input type="hidden" name="candle_id" value="{{candle.id}}">
+                        <button type="submit" class="btn btn-dark">Add to Cart</button>
+                    </form>
+                    {% endfor %}
+                </div>
             </div>
+            <div class="col"></div>
         </div>
         {% endfor %}
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalCenterTitle">Success!</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <P>Item added to cart!</P>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="/shop/checkout" class="btn btn-primary">Cart/Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('form').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/shop/cart',
+                    method: 'post',
+                    data: $(this).serialize(),
+                    success: function(serverResponse) {
+                        $('#cartModal').modal()
+                    }
+                })
+            })
+        });
+
+        // $(function(){
+        //     $("#header").load("/header");
+        // });
+    </script>
+
 </body>
 </html>
