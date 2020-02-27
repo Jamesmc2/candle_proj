@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from .models import User
+from .models import User,Order
 import bcrypt
 from time import gmtime, strftime
 from datetime import datetime
@@ -11,7 +11,7 @@ def index(request):
     context = {
         'accounts' : User.objects.all(),
         }
-    return render(request,'user_page.html',context)
+    return render(request,'/',context)
 
 def register(request):
     errors = User.objects.basic_validator_reg(request.POST)
@@ -64,5 +64,16 @@ def edit_account(reqeust):
     current_user.save()
     return redirect('/')
 
+def submit_order(request):
+    current_user = User.objects.get(id=request.session['user_id'])
+    Order.objects.create(
+        user = current_user,
+    )
+    return redirect('/')
 
-    
+def user_page(request):
+    current_user = User.objects.get(id=request.session['user_id'])
+    context = {
+        'current_user' : current_user
+    }
+    return render(request, 'user_page.html', context)

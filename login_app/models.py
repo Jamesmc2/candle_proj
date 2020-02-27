@@ -49,20 +49,20 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
-class Address(models.Model):
-    users_who_saved = models.ManyToManyField(User, related_name = 'saved_addresses')
-    street_address = models.CharField(max_length = 155)
-    city = models.CharField(max_length = 155)
-    state = models.CharField(max_length = 15)
-    zip_code = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+# class Address(models.Model):
+#     users_who_saved = models.ManyToManyField(User, related_name = 'saved_addresses')
+#     street_address = models.CharField(max_length = 155)
+#     city = models.CharField(max_length = 155)
+#     state = models.CharField(max_length = 15)
+#     zip_code = models.IntegerField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
 
 
 class Order(models.Model):
     user = models.ForeignKey(User, related_name = 'orders', on_delete = models.CASCADE)
-    total_price = models.IntegerField()
-    address = models.ForeignKey(Address, related_name = 'orders', on_delete = models.CASCADE)
+    # total_price = models.IntegerField()
+    # address = models.ForeignKey(Address, related_name = 'orders', on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
