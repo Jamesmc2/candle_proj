@@ -18,27 +18,28 @@ def register(request):
     if len(errors)>0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect('login/')
+        return redirect('/login')
     password = request.POST['password']
     pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
     new_user=User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = pw_hash, birthday = request.POST['birthday'])
     request.session['user_id'] = new_user.id
     request.session['user_name'] = new_user.first_name
-    return redirect('login/')
+    return redirect('/login')
 
 def login(request):
     errors = User.objects.basic_validator_login(request.POST)
     if len(errors)>0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect('login/')
+        return redirect('/login')
     user = User.objects.filter(email = request.POST['email'])
     if user:
         if bcrypt.checkpw(request.POST['password'].encode(), user[0].password.encode()):
             request.session['user_id'] = user[0].id
             request.session['user_name'] = user[0].first_name
             return redirect('login/')
-    return redirect('login/')
+    return redirect('/')
+
 
 def success(request):
     if not 'user_id' in request.session:
@@ -56,13 +57,14 @@ def delete(request):
     del request.session['user_name']
     return redirect('/')
 
-def edit_account(reqeust):
-    current_user = User.objects.get(id=reqeust.session['user_id'])
-    current_user.first_name = reqeust.POST['first_name']
-    current_user.last_name = reqeust.POST['last_name']
-    current_user.email = reqeust.POST['email']
+def edit_account(request):
+    current_user = User.objects.get(id=request.session['user_id'])
+    current_user.first_name = request.POST['first_name']
+    current_user.last_name = request.POST['last_name']
+    current_user.email = request.POST['email']
     current_user.save()
-    return redirect('/')
+    request.session['user_name'] = request.POST['first_name']
+    return redirect('/login/user_page')
 
 def submit_order(request):
     current_user = User.objects.get(id=request.session['user_id'])
@@ -74,6 +76,6 @@ def submit_order(request):
 def user_page(request):
     current_user = User.objects.get(id=request.session['user_id'])
     context = {
-        'current_user' : current_user
+        'user' : current_user
     }
     return render(request, 'user_page.html', context)
