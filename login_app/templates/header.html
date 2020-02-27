@@ -29,13 +29,15 @@
             </li>
         </ul>
         {% if request.session.user_id %}
-        <a href="#" class="text-white">Cart |</a>
+        <a href="#" class="text-white mx-1">Cart |</a>
         {% endif %}
         {% if not request.session.user_id %}
         <a class="btn btn-light" href="/login" role="button">Login</a>
         {% else %}
-        <span class='text-white'> Welcome, </span> <a href="/login/user_page" class="text-white">
-            {{request.session.user_name}}!</a>
+        <span class='text-white mx-1'>Welcome,</span> 
+        <a href="/login/user_page" class="text-white mx-1">
+            {{request.session.user_name}}! |</a>
+        <a href="/login/logout" class="mx-1 text-white">Logout</a>
         {% endif %}
     </div>
 </nav>

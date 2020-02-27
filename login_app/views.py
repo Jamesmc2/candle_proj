@@ -37,7 +37,7 @@ def login(request):
         if bcrypt.checkpw(request.POST['password'].encode(), user[0].password.encode()):
             request.session['user_id'] = user[0].id
             request.session['user_name'] = user[0].first_name
-            return redirect('login/')
+            return redirect('/')
     return redirect('/')
 
 
