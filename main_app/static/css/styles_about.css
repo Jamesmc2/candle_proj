@@ -1,0 +1,51 @@
+#wrapper{
+    background-color: #747474;
+    
+}
+
+.body_img{
+    width: 400px;
+}
+
+.body{
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: white;
+
+}
+
+.about_img{
+    width: 300px;
+    
+}
+.bottom_img{
+    margin-left: 200px;
+    width: 80%;
+    margin-bottom: 50px;;
+}
+
+#logo{
+    height: 80px;
+    margin-right: 60px;
+}
+
+footer {
+    background-color: black;
+    display: flex;
+    padding: 20px;
+    color: white;
+}
+.foot_center{
+    margin-left: 300px;
+}
+.icon {
+    height: auto;
+    width: 30px;
+}
+header {
+    width:100%;
+    background-color: black;
+    height:90px;
+}
