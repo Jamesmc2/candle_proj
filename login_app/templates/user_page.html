@@ -20,6 +20,7 @@
                 <div id="account_info" class="col-md-6 col-sm-12 justify-content-center">
                     <h1>Account info:</h1>
                     <form action="/login/edit_account" method="POST">
+                        {% csrf_token %}
                         First name:<br>
                         <input type="text" name="first_name" value="{{user.first_name}}"><br>
                         Last name:<br>
