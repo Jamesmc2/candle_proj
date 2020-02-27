@@ -11,7 +11,7 @@ def index(request):
     context = {
         'accounts' : User.objects.all(),
         }
-    return render(request,'/',context)
+    return render(request,'login_register.html',context)
 
 def register(request):
     errors = User.objects.basic_validator_reg(request.POST)
