@@ -1,0 +1,57 @@
+#wrapper{
+    background-color: #747474;
+}
+
+.img_car{
+    width: 30%;
+    height: 400px;
+    margin-top: 20px;
+}
+.mid_3{
+    width: 200px;
+    height: auto
+}
+.bottom{
+    margin-top: 20px;
+    
+}
+.bottom img{
+    height: 230px;
+}
+
+header {
+    width:100%;
+    background-color: black;
+    height:90px;
+}
+
+#logo{
+    height: 80px;
+    margin-right: 60px;
+}
+.img_car img{
+    height: 400px;
+}
+
+.bottom {
+    margin-bottom: 40px;
+}
+
+.bottom h3, p, a{
+    color: white;
+    
+    
+}
+footer {
+    background-color: black;
+    display: flex;
+    padding: 20px;
+    color: white;
+}
+.foot_center{
+    margin-left: 300px;
+}
+.icon {
+    height: auto;
+    width: 30px;
+}
