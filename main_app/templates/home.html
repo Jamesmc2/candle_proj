@@ -33,7 +33,7 @@
                                 Candles
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Speakeasy Sips</a>
+                                <a class="dropdown-item" href="/shop">Speakeasy Sips</a>
                                 <a class="dropdown-item" href="#">Holiday Line</a>
                             </div>
                         </li>
@@ -48,7 +48,7 @@
                     <a href="#" class="text-white">Cart |</a>
                     {% endif %}
                     {% if not request.session.user_id %}
-                    <a class="btn btn-light" href="#" role="button">Login</a>
+                    <a class="btn btn-light" href="login/" role="button">Login</a>
                     {% else %}
                     <span class='text-white'> Welcome, </span> <a href="/logout" class="text-white">
                         {{request.session.user_name}}!</a>
@@ -91,7 +91,7 @@
                     <img src="{% static 'img/lemon.jpg' %}" class='img-thumbnail mid_3'>
                 </div>
                 <div class='col'>
-                    <a href='' class='text-decoration-none'>
+                    <a href='/shop' class='text-decoration-none'>
                         <h3>Shop</h3>
                     </a>
                     <p>Check out our 20's themed line, Speakeasy Sips, in addition to bonus lines throughout the year!
