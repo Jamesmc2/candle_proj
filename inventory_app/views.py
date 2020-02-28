@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from .models import Candle, Scent
+from login_app.models import User
 from operator import itemgetter
 
 def shop(request):
     scents = Scent.objects.all()
+    if "user_id" in request.session:
+        user = User.objects.get(id = request.session["user_id"])
+    else:
+        user = None
     context = {
-        "scents" : scents
+        "scents" : scents,
+        "user" : user
     }
     return render(request, 'shop.html', context)
 
