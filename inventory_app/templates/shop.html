@@ -23,7 +23,12 @@
                     {% load static %}
                     <img src="{% static 'img/' %}{{scent.image}}" class="mr-3" alt="{{candle.name}}">
                     <div class="media-body">
-                        <h5 class="mt-2">{{scent.name}}</h5>
+                        <div class = "row">
+                            <h5 class="mt-2 col-8">{{scent.name}}</h5>
+                            {% if request.session.user_id %}
+                            <button class="btn btn-link favebutton col-4" id="{{scent.id}}" href="#">Add to Favorites</button>
+                            {% endif %}
+                        </div>
                         <p>{{scent.desc}}</p>
                         {% for candle in scent.candles.all %}
                         <div class="row">
@@ -40,7 +45,6 @@
                                 <input type="hidden" name="candle_id" value="{{candle.id}}">
                                 <button type="submit" class="btn btn-dark">Add to Cart</button>
                             </form>
-                            <button class="btn btn-link favebutton col-4" id="{{candle.id}}" href="#">Favorite</button>
                         </div>
                         {% endfor %}
                     </div>
@@ -119,7 +123,7 @@
             // $('.favebutton').onclick(function (e) {
             //     e.preventDefault();
             //     $.ajax({
-            //         url: '/login/add_favorite/',
+            //         url: '/login/favorite_list/'+$(this).attr("id"),
             //         method: 'get',
             //         data: $(this).serialize(),
             //         success: function (serverResponse) {
