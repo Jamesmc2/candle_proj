@@ -40,8 +40,8 @@
                     <ul>
                         {% for favorite in user.favorites.all %}
                         <li>
-                            {{favorite}} <a href="/shop/#scent{{favorite.id}}" class="btn btn-dark">Find in shop!</a>
-                        </li>
+                            <span class="increase_font">{{favorite}}</span> <a href="/shop/#scent{{favorite.id}}" class="btn btn-dark ml-5 pb-1 find_in_shop">Find in shop!</a>
+                        </li><br>
                         {% endfor %}
                     </ul>
                 </div>
