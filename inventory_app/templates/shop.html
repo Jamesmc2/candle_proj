@@ -19,9 +19,9 @@
             {% for scent in scents %}
             <div class="row" id="scent{{scent.id}}">
                 <div class="col"></div>
-                <div class="media mt-4 border border-dark col-6" style="background-color: white;">
+                <div class="media my-3 border border-dark col-6" style="background-color: white;">
                     {% load static %}
-                    <img src="{% static 'img/' %}{{scent.image}}" class="mr-3" alt="{{candle.name}}">
+                    <img src="{% static 'img/' %}{{scent.image}}" class="mr-3" alt="{{candle.name}}" style="width: 340px; height: 270px">
                     <div class="media-body">
                         <div class = "row">
                             <h5 class="mt-2 col-8">{{scent.name}}</h5>
