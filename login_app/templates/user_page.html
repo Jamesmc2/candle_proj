@@ -11,9 +11,8 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
-<body id="body">
+<body>
     <div id="wrapper">
-
         {% include 'header.html' %}
         <div class="container">
             <div class="row justify-content-center">
@@ -38,6 +37,13 @@
 
                 <div class="col-md-6 col-sm-12 justify-content-center" id="favorites">
                     <h1>Favorite Candles:</h1>
+                    <ul>
+                        {% for favorite in user.favorites.all %}
+                        <li>
+                            {{favorite}} <a href="/shop" class="btn btn-dark">Find in shop!</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>

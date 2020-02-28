@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import User,Order
+from inventory_app.models import Candle,Scent
 import bcrypt
 from time import gmtime, strftime
 from datetime import datetime
@@ -79,3 +80,13 @@ def user_page(request):
         'user' : current_user
     }
     return render(request, 'user_page.html', context)
+
+def add_favorite(request, scent_id):
+    current_user = User.objects.get(id=request.session['user_id'])
+    current_scent = Scent.objects.get(id = scent_id)
+    current_user.favorites.add(current_scent)
+    return
+    
+
+
+
