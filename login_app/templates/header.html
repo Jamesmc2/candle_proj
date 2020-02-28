@@ -28,9 +28,11 @@
                 <a class="nav-link" href="#" aria-disabled="true"></a>
             </li>
         </ul>
-        {% if request.session.user_id %}
-        <a href="#" class="text-white mx-1">Cart |</a>
-        {% endif %}
+        <div id="cartQuantity">
+            {% if request.session.cart %}
+            <a href="/shop/cart" class="text-white mx-1">Cart (${{request.session.cart_total|floatformat:2}}) |</a>
+            {% endif %}
+        </div>
         {% if not request.session.user_id %}
         <a class="btn btn-light" href="/login" role="button">Login</a>
         {% else %}

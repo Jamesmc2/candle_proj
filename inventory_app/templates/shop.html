@@ -19,27 +19,29 @@
             {% for scent in scents %}
             <div class="row">
                 <div class="col"></div>
-                <div class="media mb-5 border border-dark col-6" style="background-color: white;">
+                <div class="media mt-4 border border-dark col-6" style="background-color: white;">
                     {% load static %}
                     <img src="{% static 'img/' %}{{scent.image}}" class="mr-3" alt="{{candle.name}}">
                     <div class="media-body">
                         <h5 class="mt-2">{{scent.name}}</h5>
                         <p>{{scent.desc}}</p>
                         {% for candle in scent.candles.all %}
-                        <form action="/shop/cart" method="POST" class="form-inline mb-2">
-                            {%csrf_token %}
-                            <label class="my-1 mr-2" for="quantity">{{candle.style}}: ${{candle.price}}</label>
-                            <select class="custom-select mr-sm-2" id="quantity" name="quantity">
-                                <option selected value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <input type="hidden" name="candle_id" value="{{candle.id}}">
-                            <button type="submit" class="btn btn-dark">Add to Cart</button>
-                            <button class="btn btn-link favebutton" href="/login/add_favorite/{{candle.id}}">Favorite</button>
-                        </form>
+                        <div class="row">
+                            <form action="/shop/cart/add" method="POST" class="form-inline mb-2 col-8">
+                                {%csrf_token %}
+                                <label class="my-1 mr-2" for="quantity">{{candle.style}}: ${{candle.price}}</label>
+                                <select class="custom-select mr-sm-2" id="quantity" name="quantity">
+                                    <option selected value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <input type="hidden" name="candle_id" value="{{candle.id}}">
+                                <button type="submit" class="btn btn-dark">Add to Cart</button>
+                            </form>
+                            <button class="btn btn-link favebutton col-4" id="{{candle.id}}" href="#">Favorite</button>
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -62,7 +64,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="/shop/checkout" class="btn btn-primary">Cart/Checkout</a>
+                        <a href="/shop/cart" class="btn btn-primary">Cart/Checkout</a>
                     </div>
                 </div>
             </div>
@@ -104,26 +106,28 @@
             $('form').submit(function (e) {
                 e.preventDefault();
                 $.ajax({
-                    url: '/shop/cart',
+                    url: '/shop/cart/add',
                     method: 'post',
                     data: $(this).serialize(),
                     success: function (serverResponse) {
+                        $('#cartQuantity').html(serverResponse)
                         $('#cartModal').modal()
                     }
                 })
             })
 
-            $('.favebutton').onclick(function (e) {
-                e.preventDefault();
-                $.ajax({
-                    url: '/login/add_favorite/{{candle.id}}',
-                    method: 'get',
-                    data: $(this).serialize(),
-                    success: function (serverResponse) {
-                        $('#faveModal').modal()
-                    }
-                })
-            })
+            // $('.favebutton').onclick(function (e) {
+            //     e.preventDefault();
+            //     $.ajax({
+            //         url: '/login/add_favorite/',
+            //         method: 'get',
+            //         data: $(this).serialize(),
+            //         success: function (serverResponse) {
+            //             $('#faveModal').modal()
+            //         }
+            //     })
+            // })
+        
         });
 
         // $(function(){
