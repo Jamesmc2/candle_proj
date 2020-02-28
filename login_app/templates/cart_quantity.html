@@ -1,0 +1,5 @@
+<div id="cartQuantity">
+    {% if request.session.cart %}
+    <a href="/shop/cart" class="text-white mx-1">Cart (${{request.session.cart_total|floatformat:2}}) |</a>
+    {% endif %}
+</div>
