@@ -9,5 +9,6 @@ urlpatterns = [
     path('logout', views.logout),
     path('delete', views.delete),
     path('edit_account', views.edit_account),
-    path('user_page', views.user_page)
+    path('user_page', views.user_page),
+    path('favorite_list/<int:scent_id>', views.add_favorite),
 ]
