@@ -19,6 +19,20 @@
             <div class="row">
                 <div class="col events_connect">
                     <h1>Upcoming Events</h1>
+                    <table>
+                        <tr>
+                            <th>Event</th>
+                            <th>Date & Time</th>
+                            <th>Location</th>
+                        </tr>
+                        {% for event in events %}
+                        <tr>
+                            <td>{{event.name}}</td>
+                            <td>{{event.date}}</td>
+                            <td>{{event.location}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
                     <h3>Connect with us!</h3>
                     <ul>
                         <li><img class='icon' src="{% static 'img/fbicon.png' %}" alt="FB logo"> <a
@@ -32,6 +46,25 @@
                 </div>
                 <div class="col">
                     <h1>Blog</h1>
+                    {% for blog in blogs %}
+                    <h5>{{blog.title}}</h5>
+                    <p>{{blog.text}}</p>
+                    <p>@ {{blog.created_at}}</p>
+                    ----------------------------------------------------------------------<br>
+                    {% for comment in blog.comments.all %}
+                    <p>{{comment.text}}</p>
+                    <p>by {{comment.user.first_name}} @ {{comment.created_at}}</p>
+                    ----------------------------------------------------------------------<br>
+                    {% endfor %}
+                    {% if not request.session.user_id == null %}
+                    Post a comment<br>
+                    <form action='/social/{{blog.id}}/comment' method='POST'>
+                        {% csrf_token %}
+                        <input type='text' name='comment'><br><br>
+                        <input type='submit' value='Post'><br><br>
+                    </form>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
