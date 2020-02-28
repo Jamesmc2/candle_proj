@@ -25,7 +25,7 @@ def register(request):
     new_user=User.objects.create(first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = pw_hash, birthday = request.POST['birthday'])
     request.session['user_id'] = new_user.id
     request.session['user_name'] = new_user.first_name
-    return redirect('/login')
+    return redirect('/')
 
 def login(request):
     errors = User.objects.basic_validator_login(request.POST)
@@ -85,7 +85,7 @@ def add_favorite(request, scent_id):
     current_user = User.objects.get(id=request.session['user_id'])
     current_scent = Scent.objects.get(id = scent_id)
     current_user.favorites.add(current_scent)
-    return
+    return HttpResponse()
     
 
 

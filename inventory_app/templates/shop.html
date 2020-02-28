@@ -25,7 +25,7 @@
                     <div class="media-body">
                         <div class = "row">
                             <h5 class="mt-2 col-8">{{scent.name}}</h5>
-                            {% if request.session.user_id %}
+                            {% if request.session.user_id and scent not in user.favorites.all %}
                             <button class="btn btn-link favebutton col-4" id="{{scent.id}}" href="#">Add to Favorites</button>
                             {% endif %}
                         </div>
@@ -120,17 +120,19 @@
                 })
             })
 
-            // $('.favebutton').onclick(function (e) {
-            //     e.preventDefault();
-            //     $.ajax({
-            //         url: '/login/favorite_list/'+$(this).attr("id"),
-            //         method: 'get',
-            //         data: $(this).serialize(),
-            //         success: function (serverResponse) {
-            //             $('#faveModal').modal()
-            //         }
-            //     })
-            // })
+            $('.favebutton').click(function (e) {
+                console.log("got this far")
+                e.preventDefault();
+                $.ajax({
+                    url: '/login/favorite_list/'+$(this).attr("id"),
+                    method: 'get',
+                    data: $(this).serialize(),
+                    success: function (serverResponse) {
+                        $(this).hide()
+                        $('#faveModal').modal()
+                    }
+                })
+            })
         
         });
 
