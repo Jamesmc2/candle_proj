@@ -7,13 +7,21 @@ class Scent(models.Model):
     SOUTH = "south_side_fizz.jpg"
     TONIC = "tonic_and_gin.jpg"
     WARD8 = "ward8.jpg"
+    AUTOSHOP = "repair-shop.jpg"
+    BEACH = "the_beach.jpg"
+    THUNDER = "ThunderCats.jpg"
+    MAILMAN = "mailman_cologne.jpg"
 
     IMAGE_CHOICES = [
         (BEES, "Bee's Knees"),
         (FRENCH, "French 75"),
         (SOUTH, "South Side Fizz"),
         (TONIC, "Tonic and Gin"),
-        (WARD8, "Ward 8")
+        (WARD8, "Ward 8"),
+        (AUTOSHOP, "Auto Shop"),
+        (BEACH, "The Beach"),
+        (THUNDER, "Thunder Cats"),
+        (MAILMAN, "Mailman Wearing Cologne")
     ]
     
     name = models.CharField(max_length = 50)
@@ -40,13 +48,21 @@ class Candle(models.Model):
     SOUTH = "south_side_fizz.jpg"
     TONIC = "tonic_and_gin.jpg"
     WARD8 = "ward8.jpg"
+    AUTOSHOP = "repair-shop.jpg"
+    BEACH = "the_beach.jpg"
+    THUNDER = "ThunderCats.jpg"
+    MAILMAN = "mailman_cologne.jpg"
 
     IMAGE_CHOICES = [
         (BEES, "Bee's Knees"),
         (FRENCH, "French 75"),
         (SOUTH, "South Side Fizz"),
         (TONIC, "Tonic and Gin"),
-        (WARD8, "Ward 8")
+        (WARD8, "Ward 8"),
+        (AUTOSHOP, "Auto Shop"),
+        (BEACH, "The Beach"),
+        (THUNDER, "Thunder Cats"),
+        (MAILMAN, "Mailman Wearing Cologne")
     ]
 
     name = models.CharField(max_length = 100)
