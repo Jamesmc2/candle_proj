@@ -17,7 +17,7 @@
 
         <div class="container-fluid" style="background-color: #747474;">
             {% for scent in scents %}
-            <div class="row">
+            <div class="row" id="scent{{scent.id}}">
                 <div class="col"></div>
                 <div class="media mt-4 border border-dark col-6" style="background-color: white;">
                     {% load static %}
